@@ -1,4 +1,8 @@
 from django.shortcuts import render, redirect
+from .models import Question, Answer
+from questionPlatform.forms import questionForm
+
+from django.contrib import messages
 
 
 # from .forms import OurForm
@@ -6,7 +10,45 @@ from django.shortcuts import render, redirect
 # from django.db.models import Q
 
 def index(request):
-    return render(request, 'index.html')
+    show_all = Question.objects.all()
+
+    context_dict = {
+        'show_all': show_all,
+    }
+
+    return render(request, 'index.html', context_dict)
+
+
+def answers(request, id):
+    ques = Question.objects.get(id=id)
+
+    ans = Answer.objects.filter(question=ques)
+
+    context_dict = {
+        'questions': ques,
+        'answers': ans,
+    }
+
+    return render(request, 'answers.html', context_dict)
+
+
+def add_questions(request):
+    form = questionForm()
+    if request.method == "POST":
+        form = questionForm(request.POST, request.FILES)
+        if form.is_valid():
+            question = form.save(commit = False)
+            question.save()
+            # messages.success(request, "Added Question Sucessfully")
+            return redirect('index')
+
+        context_dict = {'form': form}
+        return render(request, 'addQuestions.html', context_dict)
+
+
+
+
+
 
 # # Create your views here.
 # def upload_question(request):
