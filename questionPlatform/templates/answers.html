@@ -2,11 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Details</title>
 </head>
 <body>
 
     <h1>{{ questions.question_text }}</h1>
+
+    <form action='/question/post_ans/{{ questions.id }}' method='GET'>
+        <button type='submit'> Post Comment</button>
+    </form>
 
     <p>{% for data in answers %}
         <p>{{ data.answer_text }}</p>
