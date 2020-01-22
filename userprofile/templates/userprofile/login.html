@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>login</h1>
+    <div class="content">
+    <div class="section-inner clearfix">
+
+    <h3>Login Form</h3>
+
+    {% if messages %}
+        <ul>
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+
+    <form method="post" action="{% 'userprofile:login' %}">
+          {% csrf_token %}
+          {# A more "HTML" way of creating the login form#}
+          <label for="username">Username:</label>
+          <input type="text" name="username" placeholder="Username">
+          <label for="password">Password:</label>
+          <input type="password" name="password" placeholder="Password">
+          <input type="submit" name="" value="Login">
+    </form>
+
+    </div>
+</div>
+  </body>
+</html>
