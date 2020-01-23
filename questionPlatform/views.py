@@ -1,10 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Question, Answer
-<<<<<<< HEAD
 from questionPlatform.forms import questionForm, answerForm
-=======
-from questionPlatform.forms import questionForm,answerForm
->>>>>>> 3a97565c7bbbb4da3f63408236d0ce6125cffe70
+from questionPlatform.forms import questionForm, answerForm
 
 from django.contrib import messages
 
@@ -61,17 +58,10 @@ def post_answer(request, id):
             cmt_ans.question = ques_post
             cmt_ans.save()
 
-<<<<<<< HEAD
             return redirect('/question/answers/' + id)
 
     context_dict = {'form': form}
     return render(request, 'postAnswer.html', context_dict)
-=======
-            return redirect('/question/answers/'+id)
-
-    context_dict = {'form': form}
-    return render(request, 'postAnswer.html',context_dict)
->>>>>>> 3a97565c7bbbb4da3f63408236d0ce6125cffe70
 
 
 def delete_question(request, id):

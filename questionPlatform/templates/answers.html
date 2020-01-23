@@ -11,12 +11,9 @@
     <form action='/question/post_ans/{{ questions.id }}' method='GET'>
         <button type='submit'> Post Comment</button>
     </form>
-<<<<<<< HEAD
     <br>
 
     <button><a href="{% url 'delete_question' questions.id %}" style="text-decoration: none">Delete Question</a></button>
-=======
->>>>>>> 3a97565c7bbbb4da3f63408236d0ce6125cffe70
 
     <p>{% for data in answers %}
         <p>{{ data.answer_text }}</p>
