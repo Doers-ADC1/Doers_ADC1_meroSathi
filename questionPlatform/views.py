@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Question, Answer
-from questionPlatform.forms import questionForm
+from questionPlatform.forms import questionForm, answerForm
 
 from django.contrib import messages
 
@@ -37,18 +37,37 @@ def add_questions(request):
     if request.method == "POST":
         form = questionForm(request.POST, request.FILES)
         if form.is_valid():
-            question = form.save(commit = False)
+            question = form.save(commit=False)
             question.save()
             # messages.success(request, "Added Question Sucessfully")
             return redirect('index')
 
-        context_dict = {'form': form}
-        return render(request, 'addQuestions.html', context_dict)
+    context_dict = {'form': form}
+    return render(request, 'addQuestions.html', context_dict)
 
 
+def post_answer(request, id):
+    ques_post = Question.objects.get(id=id)
+    form = answerForm()
+
+    if request.method == 'POST':
+        form = answerForm(request.POST)
+        if form.is_valid():
+            cmt_ans = form.save(commit=False)
+            cmt_ans.question = ques_post
+            cmt_ans.save()
+
+            return redirect('/question/answers/' + id)
+
+    context_dict = {'form': form}
+    return render(request, 'postAnswer.html', context_dict)
 
 
+def delete_question(request, id):
+    ques = Question.objects.get(id=id)
+    ques.delete()
 
+    return redirect('/')
 
 # # Create your views here.
 # def upload_question(request):
