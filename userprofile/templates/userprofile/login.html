@@ -3,13 +3,86 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <link rel="stylesheet" href="css/profile.css">
   </head>
+  <!DOCTYPE html>
+  <html lang="en" dir="ltr">
+    <head>
+      <meta charset="utf-8">
+      <title></title>
+      <link rel="stylesheet" href="css/profile.css">
+    </head>
+    <style>
+    body {font-family: Arial, Helvetica, sans-serif;
+        }
+    .box{
+      width:50%;
+      text-align: center;
+      margin-left:25%;
+
+
+    }
+    form {border: 3px solid #f1f1f1;}
+
+    input[type=text], input[type=password], input[type=email], input[type=image] {
+      width:100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      cursor: pointer;
+      width: 30%;
+    }
+
+    button:hover {
+      opacity: 0.8;
+    }
+
+    .imgcontainer {
+      text-align: center;
+      margin: 24px 0 12px 0;
+    }
+
+    img.avatar {
+      width: 40%;
+      border-radius: 50%;
+    }
+
+    .container {
+      padding: 16px;
+    }
+
+    span.psw {
+      float: right;
+      padding-top: 16px;
+    }
+
+    /* Change styles for span and cancel button on extra small screens */
+    @media screen and (max-width: 300px) {
+      span.psw {
+         display: block;
+         float: none;
+      }
+      .cancelbtn {
+         width: 100%;
+      }
+    }
+    </style>
+
   <body>
-    <h1>login</h1>
     <div class="content">
     <div class="section-inner clearfix">
 
-    <h3>Login Form</h3>
+    <h3 style="text-align:center;">Login Form</h3>
 
     {% if messages %}
         <ul>
@@ -18,15 +91,23 @@
         {% endfor %}
         </ul>
     {% endif %}
-
-    <form method="post" action="{% 'userprofile:login' %}">
+    <form method="post" action="{% url 'login' %}">
+      <div class="box">
           {% csrf_token %}
           {# A more "HTML" way of creating the login form#}
-          <label for="username">Username:</label>
-          <input type="text" name="username" placeholder="Username">
-          <label for="password">Password:</label>
-          <input type="password" name="password" placeholder="Password">
-          <input type="submit" name="" value="Login">
+          <div class="imgcontainer">
+            <img src="img_avatar2.png" alt="Avatar" class="avatar">
+          </div>
+          <div class="container">
+            <label for="uname"><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="username" required>
+            <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="password" required>
+            <button type="submit">Login</button>
+          </div>
+          <div class="container" style="background-color:#f1f1f1">
+          </div>
+        </div>
     </form>
 
     </div>
