@@ -13,14 +13,14 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from .views import register, login, logout, index
+from .views import register, user_login, logout, index
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
     path('signup/', register, name="register"),
-    path('login/', login, name="login"),
+    path('login/', user_login, name="login"),
     path('index/', index, name="index"),
     path('logout/', logout, name="logout")
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

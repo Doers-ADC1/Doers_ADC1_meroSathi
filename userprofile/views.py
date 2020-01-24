@@ -21,7 +21,8 @@ def register(request):
             profile.user = user
             if 'photo' in request.FILES:
                 print('Got it....')
-                profile.photo = request.FILES['profile/']
+                profile.photo = request.FILES['photo']
+                print(request.FILES['photo'])
             profile.save()
             registered = True
             return redirect('index')
@@ -30,7 +31,7 @@ def register(request):
         profile_form = ProfileForm()
     return render(request, "userprofile/signup.html", {"form":form, "profile_form":profile_form, 'registered':registered})
 #login to system
-def login(request):
+def user_login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -42,11 +43,10 @@ def login(request):
             else:
                 messages.error(request, 'Your account was inactive !!!')
         else:
-            print("They used username: {} and password: {}".format(student_id,password))
+            print("They used username: {} and password: {}".format(username,password))
             messages.error(request, 'Invalid login details given !!!')
     else:
         return render(request, 'userprofile/login.html', {})
-
 @login_required
 def logout(request):
     auth.logout(request)
