@@ -6,7 +6,7 @@ from questionPlatform.models import Question, Answer
 class questionForm(forms.ModelForm):
     class Meta:
         model = Question
-        fields = ['question_text', 'post_date']
+        fields = ['question_text']
 
 class answerForm(forms.ModelForm):
     class Meta:
