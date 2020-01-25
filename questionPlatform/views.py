@@ -1,14 +1,9 @@
 from django.shortcuts import render, redirect
 from .models import Question, Answer
 from questionPlatform.forms import questionForm, answerForm
-from questionPlatform.forms import questionForm, answerForm
 
 from django.contrib import messages
 
-
-# from .forms import OurForm
-# from .forms import Question
-# from django.db.models import Q
 
 def index(request):
     show_all = Question.objects.all()
@@ -45,6 +40,20 @@ def add_questions(request):
 
     context_dict = {'form': form}
     return render(request, 'addQuestions.html', context_dict)
+
+
+def edit_question(request, id):
+    edit_ques = Question.objects.get(id=id)
+
+    if request.method == "POST":
+        form = questionForm(request.POST, request.FILES, instance=edit_ques)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+
+    form = questionForm(instance=edit_ques)
+    context_dict = {'form': form}
+    return render(request, 'edit_question.html', context_dict)
 
 
 def post_answer(request, id):
