@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'questionPlatform',
+    'crispy_forms',
+
 ]
 
 MIDDLEWARE = [
@@ -119,3 +122,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Login redirect
+LOGIN_REDIRECT_URL ='/home'
+
+# Logout redirect
+LOGOUT_REDIRECT_URL ="/"
+
