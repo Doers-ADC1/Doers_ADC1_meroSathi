@@ -21,4 +21,5 @@ from userprofile import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('userprofile.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
 ]
