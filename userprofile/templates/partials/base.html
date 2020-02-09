@@ -1,0 +1,123 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} {% endblock %}</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href = "{% static 'vendors/bootstrap/dist/css/bootstrap.min.css' %}">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href = "{% static 'vendors/font-awesome/css/font-awesome.min.css' %}">
+    <!-- NProgress -->
+    <link  rel="stylesheet" href="{% static 'vendors/nprogress/nprogress.css' %}">
+    <!-- jQuery custom content scroller -->
+    <link  rel="stylesheet" href="{% static 'vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css' %}"/>
+
+    <!-- Custom Theme Style -->
+    <link  rel="stylesheet" href="{% static 'build/css/custom.min.css' %}">
+
+    <!-- profile settings css -->
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <!--  old stylesheet
+         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+     -->
+    {% include 'partials/header.html' %}
+</head>
+<body class="nav-md">
+<div class="container body">
+
+    <div class="main_container">
+        <div class="col-md-3 left_col menu_fixed">
+            <div class="left_col scroll-view">
+
+                <div class="clearfix"></div>
+
+                <!-- menu profile quick info -->
+                <div class="profile clearfix">
+                    <div class="profile_pic">
+                        <img src="{% static 'images/user-profile-default.jpg' %}" alt="profile image" class="img-circle profile_img">
+                    </div>
+                    <div class="profile_info">
+                        <span>Welcome,</span>
+                        {% if user.is_authenticated %}
+                            <h2>{{ request.user.username }}</h2>
+                        {% else %}
+                            <h2>Stranger</h2>
+                        {% endif %}
+                    </div>
+                </div>
+                <!-- /menu profile quick info -->
+
+                <br />
+
+                <!-- sidebar menu -->
+                <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                    <div class="menu_section">
+                        <h3>Posts</h3>
+                        <ul class="nav side-menu">
+                            <li><a href="#"><i class="fa fa-plus-square"></i> Post Question</a>
+                            </li>
+                            <li><a href="#"><i class="fa fa-clock-o"></i> Latest Posts</a>
+                            </li>
+                            <li><a href="#"><i class="fa fa-clone"></i>My Posts</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="menu_section">
+                        <h3>General</h3>
+                        <ul class="nav side-menu">
+                            <li><a href="{% url 'profile_settings' %}"><i class="fa fa-user"></i> Profile</a>
+                            </li>
+                            <li><a href="{% url 'bug' %}"><i class="fa fa-bug"></i> Report Bug</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+                <!-- /sidebar menu -->
+            </div>
+        </div>
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+            {% block content %}
+
+            {% endblock %}
+
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+            <div class="pull-right">
+                Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+            </div>
+            <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+    </div>
+
+
+</div>
+
+<!-- jQuery -->
+<script src = "{% static 'vendors/jquery/dist/jquery.min.js' %}"></script>
+<!-- Bootstrap -->
+<script src = "{% static 'vendors/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+<!-- FastClick -->
+<script src="{% static 'vendors/fastclick/lib/fastclick.js' %}"></script>
+<!-- NProgress -->
+<script src="{%  static 'vendors/nprogress/nprogress.js' %}"></script>
+<!-- jQuery custom content scroller -->
+<script src="{% static 'vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+
+<!-- Custom Theme Scripts -->
+<script src="{% static 'build/js/custom.min.js' %}"></script>
+
+<!-- old script
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+-->
+</body>
+</html>
