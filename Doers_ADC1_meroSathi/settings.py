@@ -37,8 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'userprofile.apps.UserprofileConfig',
+    # 'userprofile.apps.UserprofileConfig',
     'questionPlatform',
+    'userprofile',
     'crispy_forms',
 ]
 
@@ -57,7 +58,7 @@ ROOT_URLCONF = 'Doers_ADC1_meroSathi.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
+        'DIRS': [os.path.join(BASE_DIR, 'userprofile/templates/partials'),]
         ,
         'APP_DIRS': True,
         'OPTIONS': {

@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from .models import Question, Answer
 from questionPlatform.forms import questionForm, answerForm
@@ -5,14 +6,14 @@ from questionPlatform.forms import questionForm, answerForm
 from django.contrib import messages
 
 
-def index(request):
+def home(request):
     show_all = Question.objects.all()
 
     context_dict = {
         'show_all': show_all,
     }
 
-    return render(request, 'index.html', context_dict)
+    return render(request, 'home.html', context_dict)
 
 
 def answers(request, id):
@@ -28,15 +29,17 @@ def answers(request, id):
     return render(request, 'answers.html', context_dict)
 
 
+@login_required
 def add_questions(request):
     form = questionForm()
     if request.method == "POST":
         form = questionForm(request.POST, request.FILES)
         if form.is_valid():
             question = form.save(commit=False)
+            question.author = request.user
             question.save()
             # messages.success(request, "Added Question Sucessfully")
-            return redirect('index')
+            return redirect('home')
 
     context_dict = {'form': form}
     return render(request, 'addQuestions.html', context_dict)
@@ -56,6 +59,7 @@ def edit_question(request, id):
     return render(request, 'edit_question.html', context_dict)
 
 
+@login_required
 def post_answer(request, id):
     ques_post = Question.objects.get(id=id)
     form = answerForm()
@@ -65,6 +69,7 @@ def post_answer(request, id):
         if form.is_valid():
             cmt_ans = form.save(commit=False)
             cmt_ans.question = ques_post
+            cmt_ans.ans_author = request.user
             cmt_ans.save()
 
             return redirect('/question/answers/' + id)
