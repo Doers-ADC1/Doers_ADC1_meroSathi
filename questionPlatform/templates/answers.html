@@ -30,6 +30,16 @@
                                             <div class="byline">
                                                 <span>{{ questions.post_date }}</span> by <a>{{ questions.author }}</a>
                                             </div>
+                                            <form action='/question/post_ans/{{ questions.id }}' method='GET'>
+                                                <button type='submit'> Post Comment</button>
+                                            </form>
+                                            <br>
+
+                                            <button><a href="{% url 'edit_question' questions.id %}" style="text-decoration: none">Edit Question</a></button>
+
+                                            <br><br>
+
+                                            <button><a href="{% url 'delete_question' questions.id %}" style="text-decoration: none">Delete Question</a></button>
                                             {% for data in answers %}
                                                 <p> <b> {{ data.ans_author }} Answers: </b>  {{ data.answer_text }}</p>
                                             {% endfor %}
