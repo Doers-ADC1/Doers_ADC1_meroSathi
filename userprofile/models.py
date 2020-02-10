@@ -7,8 +7,8 @@ from django.db.models.signals import post_save
 
 # # Create your models here.
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile_image = models.FileField(upload_to='profileImage/', null=True, blank=True)
+    user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
+    profile_image = models.FileField(default="user-profile-default.jpg", upload_to='profileImage/', null=True, blank=True)
 
     def __str__(self):
         return self.user.username
