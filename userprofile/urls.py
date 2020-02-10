@@ -28,6 +28,8 @@ urlpatterns = [
     path('accounts/logout/', auth_views.LogoutView.as_view(), name="logout"),
     path('accounts/signup/', views.register, name="signup"),
     path('account/settings', views.profile_settings, name="profile_settings"),
+    path('account/settings/edit_profile', views.edit_profile, name="edit_profile"),
+    path('download', views.download_profile_image, name="download"),
     path('bug/', views.bug_report, name="bug"),
     path('test/', views.test, name="test"),
 
