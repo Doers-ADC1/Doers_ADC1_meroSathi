@@ -1,6 +1,7 @@
 from django.contrib import admin
+from django.conf.urls import url
 from django.urls import path
-
+from rest_framework.urlpatterns import format_suffix_patterns
 from questionPlatform import views
 
 urlpatterns = [
@@ -13,4 +14,8 @@ urlpatterns = [
     path('search/', views.search, name='search'),
     path('myposts/', views.own_posts,name='myposts'),
     path('latestposts/', views.latest_posts, name='latestposts'),
+    url(r'^squestions/', views.QuestionList.as_view()),
 ]
+
+urlpatterns = format_suffix_patterns(urlpatterns)
+
