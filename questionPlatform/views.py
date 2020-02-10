@@ -3,7 +3,6 @@ from django.shortcuts import render, redirect
 from .models import Question, Answer
 from questionPlatform.forms import questionForm, answerForm
 from django.db.models import Q
-
 from django.contrib import messages
 
 
@@ -94,6 +93,28 @@ def search(request):
         ques = []
     context_dict = {"ques": ques}
     return render(request, 'search_result.html', context_dict)
+
+
+def own_posts(request):
+    filter_author = Question.objects.filter(author=request.user)
+    context_dict = {
+        'filter_author': filter_author,
+    }
+
+    return render(request, "my_posts.html", context_dict)
+
+
+def latest_posts(request):
+    try:
+        latest_posts = Question.objects.all().order_by('-post_date')
+    except:
+        latest_posts = []
+
+    context_dict = {
+        'latest_posts': latest_posts,
+    }
+
+    return render(request, 'latest_posts.html', context_dict)
 
 # # Create your views here.
 # def upload_question(request):
