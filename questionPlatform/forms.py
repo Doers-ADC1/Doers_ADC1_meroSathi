@@ -8,7 +8,7 @@ from questionPlatform.models import Question, Answer
 class questionForm(forms.ModelForm):
     class Meta:
         model = Question
-        fields = ['question_text']
+        fields = ['question']
 
 
 class answerForm(forms.ModelForm):
