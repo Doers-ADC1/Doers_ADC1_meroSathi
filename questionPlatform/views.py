@@ -89,7 +89,7 @@ def delete_question(request, id):
 def search(request):
     sqs = request.POST.get('q')
     if sqs:
-        ques = Question.objects.filter(Q(question_text=sqs))
+        ques = Question.objects.filter(Q(question__icontains=sqs))
     else:
         ques = []
     context_dict = {"ques": ques}
