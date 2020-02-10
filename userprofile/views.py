@@ -1,8 +1,12 @@
 from django.shortcuts import render, redirect
+from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from userprofile.forms import RegistrationForm
+from userprofile.forms import RegistrationForm, ProfileForm
 from django.contrib import messages
+
+import os
+from PIL import Image
 
 
 # Create your views here.
@@ -31,8 +35,31 @@ def profile_settings(request):
     return render(request, 'userprofile/profile.html')
 
 
+@login_required
+def edit_profile(request):
+    user = request.user
+    form = ProfileForm(instance=user)
+
+    if request.method == "POST":
+        form = ProfileForm(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('profile_settings')
+
+    context_dict = {'form': form}
+
+    return render(request, 'userprofile/update_profile.html', context_dict)
+
+
 def bug_report(request):
     return render(request, 'bugreport.html')
+
+
+def download_profile_image(request):
+    im = Image.open(settings.MEDIA_ROOT + "/" + str(request.user.profile.profile_image))
+    im = im.save(os.environ['HOME'] + "/Downloads/profile_pic_download.jpg")
+
+    return render(request, 'userprofile/profile.html')
 
 
 def test(request):
