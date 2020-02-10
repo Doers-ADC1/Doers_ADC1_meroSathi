@@ -5,6 +5,10 @@ from questionPlatform.forms import questionForm, answerForm
 from django.db.models import Q
 from django.contrib import messages
 
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from questionPlatform.serializers import QuestionSerializer
 
 def home(request):
     show_all = Question.objects.all()
@@ -115,6 +119,17 @@ def latest_posts(request):
     }
 
     return render(request, 'latest_posts.html', context_dict)
+
+
+class QuestionList(APIView):
+
+    def get(self, request):
+        questions = Question.objects.all()
+        serializer = QuestionSerializer(questions, many=True)
+        return Response(serializer.data)
+
+    def post(self):
+        pass
 
 # # Create your views here.
 # def upload_question(request):
