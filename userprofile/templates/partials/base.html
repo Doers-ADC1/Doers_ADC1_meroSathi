@@ -36,7 +36,11 @@
                 <!-- menu profile quick info -->
                 <div class="profile clearfix">
                     <div class="profile_pic">
-                        <img src="{% static 'images/user-profile-default.jpg' %}" alt="profile image" class="img-circle profile_img">
+                        {% if user.is_authenticated %}
+                            <img src= "{{ request.user.profile.profile_image.url }}" alt="profile image" class="img-circle profile_img">
+                        {% else %}
+                            <img src="{% static 'images/user-profile-default.jpg' %}" alt="default profile image" class="img-circle profile_img">
+                        {% endif %}
                     </div>
                     <div class="profile_info">
                         <span>Welcome,</span>
