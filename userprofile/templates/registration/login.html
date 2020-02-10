@@ -1,0 +1,49 @@
+{% extends 'partials/base.html' %}
+
+{% block title %} meroSathi || Home {% endblock %}
+
+{% block content %}
+
+    <div class="">
+        <div>
+
+            <div class="login_wrapper">
+                <div class="animate form login_form">
+                    <section class="login_content">
+                        <form method="POST" action="">
+                            {% csrf_token%}
+                            <h1>Login Form</h1>
+                            <div>
+                                <p>Username</p> {{form.username}}
+                            </div>
+                            <div>
+                                <p>Password</p> {{ form.password }}
+                            </div>
+                            <div>
+                                <button type="login" class="btn btn-default submit"  style="font-size: 18px">Log In</button>
+                            </div>
+
+                            <div class="clearfix"></div>
+
+                            <div class="separator">
+                                <p class="change_link">New to site?
+                                    <a href="{% url 'signup' %}" class="to_register"> Create Account </a>
+                                </p>
+
+                                <div class="clearfix"></div>
+                                <br />
+
+                                <div>
+                                    <h1> meroSathi</h1>
+                                    <p>©2020 All Rights Reserved. meroSathi Inc.</p>
+                                </div>
+                            </div>
+                        </form>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
