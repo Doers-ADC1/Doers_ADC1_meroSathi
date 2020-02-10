@@ -11,4 +11,6 @@ urlpatterns = [
     path('question/edit_ques/<id>', views.edit_question, name = "edit_question"),
     path('quesion/delete/<id>', views.delete_question, name="delete_question"),
     path('search/', views.search, name='search'),
+    path('myposts/', views.own_posts,name='myposts'),
+    path('latestposts/', views.latest_posts, name='latestposts'),
 ]
