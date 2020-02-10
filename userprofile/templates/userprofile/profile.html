@@ -4,13 +4,17 @@
 
 {% block content %}
 
-    <div class="">
+    <div class="" xmlns="http://www.w3.org/1999/html">
         <div class="container emp-profile">
             <form method="post">
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
-                            <img src="{% static 'images/user-profile-default.jpg' %}" alt=""/>
+                            {% if request.user.profile.user != None %}
+                                <img src="{{ request.user.profile.profile_image.url }}" alt="Add Profile picture"/>
+                            {% else %}
+                                <img src="{% static 'images/user-profile-default.jpg' %}" alt="Default profile picture"/>
+                            {% endif %}
                         </div>
 
                     </div>
@@ -20,7 +24,7 @@
                                 {{ request.user.username }}
                             </h5>
 
-                            <p class="proile-rating">POSTS : <span>10</span></p>
+                            <p class="proile-rating"> <span></span></p>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
@@ -29,13 +33,14 @@
                         </div>
                     </div>
                     <div class="col-md-2">
-                        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+                         <a href="{% url 'edit_profile' %}" class="btn btn-primary btn-lg active" role="button" aria-disabled="true">Edit Profile</a>
+
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-work">
-                            <input type="submit" class="profile-edit-btn" style="width: 100% !important;" name="btnAddMore" value="Download Image"/>
+                            <a href="{% url 'download' %}" class="btn btn-primary btn-lg active" role="button" aria-disabled="true" style="width: 100% !important;">Download Profile Image</a>
                         </div>
                     </div>
                     <div class="col-md-8">
