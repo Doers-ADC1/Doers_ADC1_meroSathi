@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from .models import Question, Answer
 from questionPlatform.forms import questionForm, answerForm
+from django.db.models import Q
 
 from django.contrib import messages
 
@@ -83,6 +84,16 @@ def delete_question(request, id):
     ques.delete()
 
     return redirect('/')
+
+
+def search(request):
+    sqs = request.POST.get('q')
+    if sqs:
+        ques = Question.objects.filter(Q(question_text=sqs))
+    else:
+        ques = []
+    context_dict = {"ques": ques}
+    return render(request, 'search_result.html', context_dict)
 
 # # Create your views here.
 # def upload_question(request):
